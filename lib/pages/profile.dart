@@ -14,11 +14,15 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SingleChildScrollView(
-      child: Container(
-        height: 1000,
-        color: Colors.red,
-        child: Text('首页'),
+    return Scaffold(
+      appBar: AppBar(title: Text("我的")),
+      body: SingleChildScrollView(
+        child: Container(
+          height: 1000,
+          width: double.infinity,
+          color: Colors.red,
+          child: Text('我的'),
+        ),
       ),
     );
   }
