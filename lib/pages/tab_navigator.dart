@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_app/pages/home.dart';
-import 'package:my_app/pages/profile.dart';
-import 'package:lottie/lottie.dart';
+import 'package:my_app/pages/home/home.dart';
+import 'package:my_app/pages/me/me.dart';
 
 class TabNavigator extends StatefulWidget {
   const TabNavigator({Key? key}) : super(key: key);
@@ -39,16 +38,15 @@ class _TabNavigatorState extends State<TabNavigator> {
   }
 
   BottomNavigationBarItem _renderBottomNavItem(
-      String title, IconData normalIcon, String activeIcon) {
+      String title, IconData normalIcon, IconData activeIcon) {
     return BottomNavigationBarItem(
       icon: SizedBox(
         child: Icon(normalIcon),
         width: 32,
         height: 28,
       ),
-      activeIcon: Lottie.asset(
-        activeIcon,
-        repeat: false,
+      activeIcon: SizedBox(
+        child: Icon(activeIcon, color: Color.fromRGBO(220, 201, 175, 1)),
         width: 32,
         height: 28,
       ),
@@ -64,10 +62,11 @@ class _TabNavigatorState extends State<TabNavigator> {
         child: PageView(
           physics: NeverScrollableScrollPhysics(),
           controller: _controller,
-          children: [Home(), Profile()],
+          children: [Home(), Me(), Me(), Me(), Me()],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(5, 7, 38, 1),
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
@@ -76,9 +75,15 @@ class _TabNavigatorState extends State<TabNavigator> {
             _currentIndex = index;
           });
         },
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Color.fromRGBO(220, 201, 175, 1),
+        selectedFontSize: 12,
         items: [
-          _renderBottomNavItem('首页', Icons.home, 'images/home_active.json'),
-          _renderBottomNavItem('我的', Icons.group, 'images/user_active.json')
+          _renderBottomNavItem('每日修行', Icons.home, Icons.home),
+          _renderBottomNavItem('减压', Icons.home, Icons.home),
+          _renderBottomNavItem('睡觉', Icons.home, Icons.home),
+          _renderBottomNavItem('专注', Icons.home, Icons.home),
+          _renderBottomNavItem('我', Icons.people, Icons.people)
         ],
       ),
     );
